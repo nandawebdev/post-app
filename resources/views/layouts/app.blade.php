@@ -39,6 +39,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
+                <form action="{{ route('logout') }}" method="post">
+                    @csrf
+                    <button type="submit" class="btn text-danger">
+                        Logout
+                    </button>
+                </form>
             </ul>
         </nav>
         <!-- /.navbar -->
@@ -69,7 +75,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- Main content -->
             <div class="content">
                 <div class="container-fluid">
-                 @yield('content');
+                    @yield('content');
                 </div><!-- /.container-fluid -->
             </div>
         </div>
