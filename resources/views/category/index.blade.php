@@ -12,6 +12,18 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body table-responsive">
+
+                    @if($errors->any())
+                    <div class="alert alert-danger d-flex flex-column">
+                        @foreach ($errors->all() as $error)
+                        <small class="text-white my-2">{{ $error }}</small>
+                        @endforeach
+                    </div>
+                    @endif
+
+                    <div class="d-flex justify-content-end mb-2">
+                        <x-kategori.form-kategori />
+                    </div>
                     <table class="table table-sm table-hover text-nowrap" id="table1">
                         <thead>
                             <tr>
@@ -26,45 +38,21 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->category_name}}</td>
-                                <td>{{ $item->descripton }}</td>
+                                <td>{{ $item->description }}</td>
                                 <td>
-                                    <a href="" class="btn btn-sm btn-success">Edit</a>
+                                    <div class="btn-group">
+                                        <x-kategori.form-kategori :id="$item->id" />
+                                        <a href="{{ route('master-data.category.destroy', $item->id) }}"
+                                            data-confirm-delete='true' class="btn btn-danger btn-sm">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </div>
                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
-            </div>
-        </div>
-
-        <div class="col-4">
-            <div class="card card-dark">
-                <div class="card-header">
-                    <h3 class="card-title">Tambah Kategori</h3>
-                </div>
-                <!-- /.card-header -->
-                <!-- form start -->
-                <form>
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label for="category_name">Nama Kategori</label>
-                            <input type="text" name="category_name" class="form-control" id="category_name"
-                                placeholder="Nama kategori">
-                        </div>
-                        <div class="form-group">
-                            <label for="description">Deskripsi</label>
-                            <textarea name="description" class="form-control" id="description" rows="4"></textarea>
-                        </div>
-
-                        <!-- Tombol kanan -->
-                        <div class="d-flex justify-content-end gap-2">
-                            <button type="reset" class="btn btn-secondary">Batal</button>
-                            <button type="submit" class="btn btn-success mx-2">Simpan</button>
-                        </div>
-
-                    </div>
-                </form>
             </div>
         </div>
     </div>

@@ -19,6 +19,8 @@ Route::middleware('auth')->group(function () {
     Route::prefix('master-data')->as('master-data.')->group(function () {
         Route::prefix('category')->as('category.')->controller(CategoryController::class)->group(function () {
             Route::get('/', 'index')->name('index');
+            Route::post('/', 'store')->name('store');
+            Route::delete('/{id}/destroy', 'destroy')->name('destroy');
         });
     });
 });

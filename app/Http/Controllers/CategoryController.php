@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category as Model;
+use App\Models\Category;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class CategoryController extends Controller
 {
@@ -15,16 +17,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $model = Model::paginate(5);
+        $model = Model::all();
+        confirmDelete('Hapus data', 'Apakah anda yakin ingin menghapus data ini?', 'Hapus', 'Batal');
         return view($this->viewPath . '.index', compact('model'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -32,38 +27,31 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        //
-    }
+        $id = $request->id;
+        $request->validated();
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Category $category)
-    {
-        //
-    }
+        Category::updateOrCreate(
+            ['id' => $id],
+            [
+                'category_name' => $request->category_name,
+                'slug' => \Illuminate\Support\Str::slug($request->category_name),
+                'description' => $request->description,
+            ]
+        );
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Category $category)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateCategoryRequest $request, Category $category)
-    {
-        //
+        toast()->success('Berhasil', 'Data berhasil disimpan!');
+        return redirect()->route('master-data.category.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        $category->delete();
+
+        toast()->success('Data berhasil dihapus');
+        return back();
     }
 }
