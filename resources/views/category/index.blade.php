@@ -13,13 +13,7 @@
                 <!-- /.card-header -->
                 <div class="card-body table-responsive">
 
-                    @if($errors->any())
-                    <div class="alert alert-danger d-flex flex-column">
-                        @foreach ($errors->all() as $error)
-                        <small class="text-white my-2">{{ $error }}</small>
-                        @endforeach
-                    </div>
-                    @endif
+                    <x-alert :errors="$errors" />
 
                     <div class="d-flex justify-content-end mb-2">
                         <x-kategori.form-kategori />

@@ -24,7 +24,7 @@
                                 value="{{ $category_name }}">
                         </div>
                         <div class="form-group">
-                            <label for="category_name">Nama Kategori</label>
+                            <label for="category_name">Deskripsi</label>
                             <textarea name="description" class="form-control" id="description" cols="30" rows="5">{{ $description }}
                             </textarea>
                         </div>

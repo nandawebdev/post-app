@@ -35,8 +35,8 @@ class Aside extends Component
                     ],
                     [
                         'label' => 'Produk',
-                        'route_active' => 'master-data.category.*',
-                        'route_name' => 'master-data.category.index',
+                        'route_active' => 'master-data.product.*',
+                        'route_name' => 'master-data.product.index',
                     ]
                 ]
 
