@@ -35,4 +35,13 @@ class LoginController extends Controller
             'email' => 'Kredentials yang anda masukkan salah'
         ])->onlyInput('email');
     }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/login');
+    }
 }
