@@ -5,19 +5,16 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
-        <div class="col-8">
+        <div class="col">
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Data Kategori</h3>
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body table-responsive">
-
-                    <x-alert :errors="$errors" />
-
                     <div class="d-flex justify-content-end mb-2">
                         <x-kategori.form-kategori />
                     </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body table-responsive">
                     <table class="table table-sm table-hover text-nowrap" id="table1">
                         <thead>
                             <tr>
