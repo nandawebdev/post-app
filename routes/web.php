@@ -22,6 +22,7 @@ Route::middleware('auth')->group(function () {
     // Route::post('users', [UserController::class, 'store'])->name('users.store');
     // Route::delete('/{id}/destroy', [UserController::class, 'destroy'])->name('users.destroy');
     Route::resource('users', UserController::class);
+    Route::post('users/change-password', [UserController::class, 'changePassword'])->name('users.change-password');
 
 
     Route::prefix('master-data')->as('master-data.')->group(function () {

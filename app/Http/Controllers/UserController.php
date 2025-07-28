@@ -39,6 +39,31 @@ class UserController extends Controller
         return redirect()->route('users.index');
     }
 
+    public function changePassword(Request $request)
+    {
+        $request->validate([
+            'old_password' => 'required',
+            'password' => 'required|min:8|confirmed',
+            // 'password' => [Password::min(8)->letters()->numbers()->symbols(), 'confirmed'],
+        ], [
+            'old_password.required' => 'Password lama harus diisi.',
+            'password.required' => 'Password baru harus diisi.',
+            'password.min' => 'Password baru harus memiliki minimal 8 karakter.',
+            'password.confirmed' => 'Konfirmasi password tidak cocok.',
+        ]);
+
+        $user = Auth::user();
+        if (!Hash::check($request->old_password, $user->password)) {
+            toast()->error('Password lama tidak cocok.', 'Gagal');
+            return back();
+        }
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        toast()->success('Password berhasil diubah.', 'Sukses');
+        return back();
+    }
+
     /**
      * Remove the specified resource from storage.
      */
