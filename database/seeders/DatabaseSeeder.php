@@ -9,20 +9,20 @@ use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
-    public function run(): void
-    {
-        // User::factory(10)->create();
+	/**
+	 * Seed the application's database.
+	 */
+	public function run(): void
+	{
+		// User::factory(10)->create();
 
-        // User::factory()->create([
-        //     'name' => 'admin',
-        //     'email' => 'admin@test.com',
-        //     'password' => Hash::make('password')
-        // ]);
-        $this->call([
-            CategorySeeder::class,
-        ]);
-    }
+		User::factory()->create([
+			'name' => 'admin',
+			'email' => 'admin@test.com',
+			'password' => Hash::make('password')
+		]);
+		// $this->call([
+		//     CategorySeeder::class,
+		// ]);
+	}
 }

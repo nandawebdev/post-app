@@ -45,15 +45,28 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
-                <form action="{{ route('logout') }}" method="post">
-                    @csrf
-                    <button type="submit" class="btn text-danger">
-                        Logout
+                <div class="dropdown">
+                    <button class="btn dropdown-toggle" , type="button" data-toggle="dropdown" aria-expanded="false">
+                        {{ ucwords(auth()->user()->name) }}
                     </button>
-                </form>
+                    <div class="dropdown-menu">
+                        <button type="button" class="btn" data-toggle="modal" data-target="#changePasswordForm">
+                            Ganti Password
+                        </button>
+                        <form action="{{ route('logout') }}" method="post">
+                            @csrf
+                            <button type="submit" class="btn text-danger">
+                                Logout
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
             </ul>
         </nav>
         <!-- /.navbar -->
+
+        <x-user.change-password-form />
 
         <!-- Main Sidebar Container -->
         <x-admin.aside />
@@ -81,6 +94,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- Main content -->
             <div class="content">
                 <div class="container-fluid">
+                    <x-alert :errors="$errors" />
                     @yield('content')
                 </div><!-- /.container-fluid -->
             </div>
