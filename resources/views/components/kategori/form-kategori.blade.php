@@ -17,7 +17,6 @@
                         </button>
                     </div>
                     <div class="modal-body">
-
                         <div class="form-group">
                             <label for="category_name">Nama Kategori</label>
                             <input type="text" class="form-control" name="category_name" id="category_name"
