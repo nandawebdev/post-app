@@ -47,4 +47,11 @@ Route::middleware('auth')->group(function () {
 		Route::post('/', 'store')->name('store');
 		Route::delete('/{id}/destroy', 'destroy')->name('destroy');
 	});
+
+	Route::prefix('laporan')->as('laporan.')->group(function () {
+		Route::prefix('penerimaan-barang')->as('penerimaan-barang.')->controller(PenerimaanBarangController::class)->group(function () {
+			Route::get('/laporan', 'laporan')->name('laporan');
+			Route::get('/laporan/{nomor_penerimaan}/detail', 'detailLaporan')->name('detail-laporan');
+		});
+	});
 });
